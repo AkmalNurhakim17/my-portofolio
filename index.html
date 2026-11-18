@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Backend Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&family=Syne:wght@600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+        /* Memaksa smooth scroll secara native di level CSS */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @theme {
+            --font-poppins: "Poppins", sans-serif;
+            --font-syne: "Syne", sans-serif;
+            --font-space: "Space Grotesk", sans-serif;
+        }
+
+        /* Smooth Animation on Load / Reload */
+        @keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(22px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-nav {
+            opacity: 0;
+            animation: fadeDown 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .animate-hero {
+            opacity: 0;
+            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .delay-100 { animation-delay: 100ms; }
+        .delay-250 { animation-delay: 250ms; }
+        .delay-400 { animation-delay: 400ms; }
+        .delay-550 { animation-delay: 550ms; }
+    </style>
+    <script src="https://kit.fontawesome.com/62341b3088.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-gray-950 text-white font-poppins selection:bg-blue-500 selection:text-white overflow-x-hidden">
+
+    <!-- MAIN NAVBAR -->
+    <nav class="animate-nav flex justify-between items-center px-6 md:px-12 py-4 bg-gray-950/85 backdrop-blur-md border-b border-blue-400/40 fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <a href="#" class="font-syne text-2xl font-bold italic tracking-normal">
+            Port<span class="text-blue-400">folio</span>
+        </a>
+        
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-7 text-sm font-normal">
+            <a href="#" class="relative py-1 text-gray-300 hover:text-blue-400 transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-blue-400 hover:after:w-full after:transition-all after:duration-300">
+                Home
+            </a>
+            <a href="#tentangSaya" class="relative py-1 text-gray-300 hover:text-blue-400 transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-blue-400 hover:after:w-full after:transition-all after:duration-300">
+                About Me
+            </a>
+            <a href="#riwayatPendidikan" class="relative py-1 text-gray-300 hover:text-blue-400 transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-blue-400 hover:after:w-full after:transition-all after:duration-300">
+                Education
+            </a>
+            <a href="#kontak" class="relative py-1 text-gray-300 hover:text-blue-400 transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-blue-400 hover:after:w-full after:transition-all after:duration-300">
+                Contact
+            </a>
+        </div>
+        
+        <!-- Hamburger Button -->
+        <div class="md:hidden">
+            <button id="hamburgerBtn" aria-label="Toggle Menu" class="p-2 rounded-lg text-gray-200 hover:text-blue-400 hover:bg-gray-900 focus:outline-none cursor-pointer transition-colors">
+                <i id="hamburgerIcon" class="fa-solid fa-bars text-lg transition-transform duration-300"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- DARK OVERLAY WHEN MOBILE MENU IS OPEN -->
+    <div id="mobileOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-xs z-30 opacity-0 pointer-events-none transition-opacity duration-300 md:hidden"></div>
+
+    <!-- MOBILE MENU SLIDE FROM RIGHT -->
+    <div id="mobileMenu" class="fixed top-0 right-0 w-68 h-screen bg-gray-900/95 backdrop-blur-xl border-l border-blue-400/30 z-40 md:hidden pt-24 px-6 shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="flex flex-col gap-1.5 text-sm">
+            <p class="text-[11px] font-medium uppercase tracking-widest text-gray-500 mb-2 px-3">Navigation</p>
+            <a href="#" class="mobile-link flex items-center gap-3 text-gray-200 py-2.5 px-3 rounded-lg hover:bg-blue-500/10 hover:text-blue-400 transition-all duration-200">
+                <i class="fa-solid fa-house text-blue-400 w-4 text-xs"></i> Home
+            </a>
+            <a href="#tentangSaya" class="mobile-link flex items-center gap-3 text-gray-200 py-2.5 px-3 rounded-lg hover:bg-blue-500/10 hover:text-blue-400 transition-all duration-200">
+                <i class="fa-solid fa-user text-blue-400 w-4 text-xs"></i> About Me
+            </a>
+            <a href="#riwayatPendidikan" class="mobile-link flex items-center gap-3 text-gray-200 py-2.5 px-3 rounded-lg hover:bg-blue-500/10 hover:text-blue-400 transition-all duration-200">
+                <i class="fa-solid fa-graduation-cap text-blue-400 w-4 text-xs"></i> Education
+            </a>
+            <a href="#kontak" class="mobile-link flex items-center gap-3 text-gray-200 py-2.5 px-3 rounded-lg hover:bg-blue-500/10 hover:text-blue-400 transition-all duration-200">
+                <i class="fa-solid fa-envelope text-blue-400 w-4 text-xs"></i> Contact
+            </a>
+        </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative min-h-screen flex items-center px-6 md:px-12 overflow-hidden">
+        <div id="heroBg" class="absolute inset-0 bg-[url('img/img.jpg')] bg-cover bg-center scale-105 transition-transform duration-1000 ease-out"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/90 to-gray-950/60"></div>
+
+        <main class="relative z-10 max-w-2xl pt-14">
+            <span class="animate-hero delay-100 inline-flex items-center gap-2 py-1 px-3 rounded-full bg-blue-500/10 border border-blue-400/30 text-blue-400 text-xs font-medium mb-4">
+                <i class="fa-solid fa-terminal text-[10px]"></i> Backend Developer
+            </span>
+            
+            <h1 class="animate-hero delay-250 font-syne text-2xl sm:text-3xl md:text-4xl font-bold leading-snug mb-4">
+                Hello I'm <span class="text-blue-400">Muhammad Akmal Nurhakim</span>
+            </h1>
+            
+            <p class="animate-hero delay-400 text-gray-300 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-4 max-w-xl">
+                I am a backend developer focused on building reliable and efficient systems, APIs, and database management.
+            </p>
+
+            <p class="animate-hero delay-550 text-gray-400 text-xs sm:text-sm font-light italic mb-7 max-w-xl">
+                "Nothing special it's just a line of code."
+            </p>
+        </main>
+    </section>
+
+    <!-- ABOUT ME SECTION -->
+    <section id="tentangSaya" class="py-24 px-6 md:px-12 bg-gray-900/50 border-t border-gray-800/60">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-14">
+                <span class="inline-block text-blue-400 text-xs font-semibold uppercase tracking-widest mb-2">Get to Know</span>
+                <h2 class="font-syne text-3xl md:text-4xl font-bold">About Me</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                <div class="md:col-span-1 flex justify-center">
+                    <div class="w-48 h-48 rounded-2xl bg-gradient-to-br from-blue-500/20 to-blue-600/5 border border-blue-400/30 p-2 flex items-center justify-center shadow-xl">
+                        <div class="w-full h-full rounded-xl bg-gray-900 flex items-center justify-center text-blue-400 text-5xl">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-2 space-y-4 text-gray-300 text-sm sm:text-base leading-relaxed">
+                    <p>
+                        Passionate about software architecture, database design, and server-side logic. I specialize in building robust backend applications using modern frameworks and maintaining optimal database performance.
+                    </p>
+                    <p>
+                        Constantly exploring open source application for studying purposes, cloning repositories, containerization with Docker, and developing scalable web applications to solve complex challenges.
+                    </p>
+                    
+                    <div class="pt-4 flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-md bg-blue-500/10 border border-blue-400/30 text-blue-400 text-xs font-medium">PHP / Laravel</span>
+                        <span class="px-3 py-1 rounded-md bg-blue-500/10 border border-blue-400/30 text-blue-400 text-xs font-medium">Node.js</span>
+                        <span class="px-3 py-1 rounded-md bg-blue-500/10 border border-blue-400/30 text-blue-400 text-xs font-medium">MySQL & Database</span>
+                        <span class="px-3 py-1 rounded-md bg-blue-500/10 border border-blue-400/30 text-blue-400 text-xs font-medium">Docker</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION SECTION -->
+    <section id="riwayatPendidikan" class="py-24 px-6 md:px-12 border-t border-gray-800/60">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-14">
+                <span class="inline-block text-blue-400 text-xs font-semibold uppercase tracking-widest mb-2">Academic Background</span>
+                <h2 class="font-syne text-3xl md:text-4xl font-bold">Education</h2>
+            </div>
+            
+            <div class="relative border-l border-blue-400/30 ml-4 md:ml-32 space-y-10 pl-6 md:pl-8">
+                <!-- Timeline Item -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] md:-left-[41px] top-1.5 w-4 h-4 rounded-full bg-blue-500 border-4 border-gray-950"></div>
+                    <span class="text-xs font-semibold text-blue-400 uppercase tracking-wider">Vocational High School</span>
+                    <h3 class="font-syne text-xl font-bold mt-1 text-white">Software Engineering (RPL)</h3>
+                    <p class="text-sm text-gray-400 font-medium mb-2">SMKN 1 Majalengka</p>
+                    <p class="text-sm text-gray-300 leading-relaxed">
+                        Studying software development, web programming, database systems, mobile development with Android, and currently focusing on backend development independently.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="kontak" class="py-24 px-6 md:px-12 bg-gray-900/50 border-t border-gray-800/60">
+        <div class="max-w-3xl mx-auto text-center">
+            <span class="inline-block text-blue-400 text-xs font-semibold uppercase tracking-widest mb-2">Get in Touch</span>
+            <h2 class="font-syne text-3xl md:text-4xl font-bold mb-4">Contact Me</h2>
+            <p class="text-gray-300 text-sm md:text-base mb-10 max-w-lg mx-auto">
+                Have a project in mind or want to collaborate? Feel free to reach out through any of the platforms below.
+            </p>
+            
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="mailto:akmalnurhakim177567@gmail.com" class="flex items-center gap-3 px-6 py-3 rounded-xl bg-gray-900 border border-blue-400/30 text-gray-200 hover:text-blue-400 hover:border-blue-400 transition-all duration-300 shadow-lg">
+                    <i class="fa-solid fa-envelope text-blue-400"></i> Email Me
+                </a>
+                <a href="https://github.com/AkmalNurhakim17" target="_blank" class="flex items-center gap-3 px-6 py-3 rounded-xl bg-gray-900 border border-blue-400/30 text-gray-200 hover:text-blue-400 hover:border-blue-400 transition-all duration-300 shadow-lg">
+                    <i class="fa-brands fa-github text-blue-400"></i> GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/muhammad-akmal-nurhakim-5630443a9/" target="_blank" class="flex items-center gap-3 px-6 py-3 rounded-xl bg-gray-900 border border-blue-400/30 text-gray-200 hover:text-blue-400 hover:border-blue-400 transition-all duration-300 shadow-lg">
+                    <i class="fa-brands fa-linkedin text-blue-400"></i> LinkedIn
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- BACK TO TOP BUTTON -->
+    <a href="#home" id="backToTop" class="fixed bottom-6 right-6 px-4 py-3 rounded-xl bg-gray-900 border border-blue-400/30 text-gray-200 hover:text-blue-400 hover:border-blue-400 transition-all duration-300 shadow-lg z-40">
+        <div class="flex items-center gap-2 text-sm font-medium">
+             <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"></path>
+            </svg>
+            <span>Back to Top</span>
+        </div>
+    </a>
+
+    <!-- FOOTER -->
+    <footer class="py-6 px-6 md:px-12 text-center border-t border-gray-900 text-gray-500 text-xs">
+        <p>&copy; 2026 Muhammad Akmal Nurhakim. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
